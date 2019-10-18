@@ -15,7 +15,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements
         SurveyFragment.ButtonClickedListener,
-        ResultsFragment.ResultButtonClickedListener{
+        ResultsFragment.ResultButtonClickedListener,
+        ConfigurationFragment.MarkSurveyDoneListener {
 
     private static final String BUNDLE_KEY_SURVEY = "SURVEY INFO";
 
@@ -45,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-            ft.add(R.id.survey_container, surveyFragment);
-            ft.add(R.id.results_container, resultsFragment);
+            ft.add(R.id.survey_container, surveyFragment, TAG_SURVEY_FRAG);
+            ft.add(R.id.results_container, resultsFragment, TAG_RESULTS_FRAG);
 
             ft.commit();
         } else {
@@ -64,15 +65,28 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void buttonClicked(View button){
         int buttonID = button.getId();
-        switch (buttonID){
+        switch (buttonID) {
             case R.id.yes_button:
                 mCountOne = mSurvey.getCountOne();
                 mCountOne += 1;
                 mSurvey.setCountOne(mCountOne);
+                break;
             case R.id.no_button:
                 mCountTwo = mSurvey.getCountTwo();
                 mCountTwo += 1;
                 mSurvey.setCountTwo(mCountTwo);
+                break;
+            case R.id.edit_button:
+                ConfigurationFragment configurationFragment = ConfigurationFragment.newInstance(mSurvey);
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content, configurationFragment, TAG_CONFIGURE_FRAG);
+
+                ft.addToBackStack(TAG_CONFIGURE_FRAG);
+
+                ft.commit();
+                break;
+
         }
 
         FragmentManager fm = getSupportFragmentManager();
@@ -82,7 +96,28 @@ public class MainActivity extends AppCompatActivity implements
 
 
     @Override
-    public void resultClick(View button){
+    public void resetClick(){
+        mSurvey.setCountOne(0);
+        mSurvey.setCountTwo(0);
 
+        FragmentManager fm = getSupportFragmentManager();
+        ResultsFragment resultFragment = (ResultsFragment) fm.findFragmentByTag(TAG_RESULTS_FRAG);
+        resultFragment.notifyCountChange(mSurvey);
+    }
+
+    @Override
+    public void surveyDone(Survey survey){
+        mSurvey = survey;
+        FragmentManager fm = getSupportFragmentManager();
+        SurveyFragment surveyFragment = (SurveyFragment) fm.findFragmentByTag(TAG_SURVEY_FRAG);
+        surveyFragment.setSurveyInfo(mSurvey);
+        ResultsFragment resultsFragment = (ResultsFragment) fm.findFragmentByTag(TAG_RESULTS_FRAG);
+        resultsFragment.notifyCountChange(mSurvey);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.results_container, resultsFragment, TAG_RESULTS_FRAG);
+        ft.replace(R.id.survey_container, surveyFragment, TAG_SURVEY_FRAG);
+
+        ft.commit();
     }
 }

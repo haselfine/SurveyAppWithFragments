@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +22,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
 
 
     public interface ResultButtonClickedListener{
-        void resultClick(View button);
+        void resetClick();
     }
 
     private ResultButtonClickedListener mResultButtonClickedListener;
@@ -79,8 +77,6 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
         mResetButton = view.findViewById(R.id.reset_button);
         mResetButton.setOnClickListener(this);
 
-        mSurvey = new Survey();
-
         if(getArguments() != null){
             mSurvey = getArguments().getParcelable(ARGS_RESULTS);
         }
@@ -93,7 +89,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
     }
     @Override
     public void onClick(View button){
-        mResultButtonClickedListener.resultClick(button);
+        mResultButtonClickedListener.resetClick();
     }
 
     private void setSurveyInfo(Survey survey) {

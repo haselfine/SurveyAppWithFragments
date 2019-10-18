@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorConfiguration"
-    tools:context="com.example.surveyappwithfragments.ConfigurationFragment">
+    tools:context="com.example.surveyappwithfragments.ConfigurationFragment"
+    android:clickable="true">
+
 
     <EditText
         android:id="@+id/user_question"

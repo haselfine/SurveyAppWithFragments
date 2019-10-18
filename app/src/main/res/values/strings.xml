@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Survey App</string>
+    <string name="question_text">Do you like ice cream?</string>
+    <string name="yes_button_text">Yes</string>
+    <string name="no_button_text">No</string>
+    <string name="yes_count_text">0</string>
+    <string name="no_count_text">0</string>
+    <string name="reset_button_text">Reset</string>
+    <string name="continue_button">Continue Survey</string>
+    <string name="results_label">Results</string>
+    <string name="results_text">First option: \nSecond option:  </string>
+    <string name="question_question">What\'s your question?</string>
+    <string name="first_answer">First answer?</string>
+    <string name="second_answer">Second answer?</string>
+    <string name="enter_question">enter question here</string>
+    <string name="enter_answer">enter answer here</string>
+    <string name="ready">Ready</string>
+    <string name="edit_button">Edit</string>
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorConfiguration"
+    tools:context="com.example.surveyappwithfragments.ConfigurationFragment">
+
+    <EditText
+        android:id="@+id/user_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/enter_question"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/first_answer_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_question" />
+
+    <EditText
+        android:id="@+id/user_answer_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/enter_answer"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/second_answer_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_answer_label" />
+
+    <EditText
+        android:id="@+id/user_answer_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/enter_answer"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/second_answer_label" />
+
+    <TextView
+        android:id="@+id/question_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_question"
+        app:layout_constraintBottom_toTopOf="@+id/user_question"
+        app:layout_constraintStart_toStartOf="@+id/user_question"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/first_answer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/first_answer"
+        app:layout_constraintBottom_toTopOf="@+id/user_answer_one"
+        app:layout_constraintStart_toStartOf="@+id/user_answer_one"
+        app:layout_constraintTop_toBottomOf="@+id/user_question" />
+
+    <TextView
+        android:id="@+id/second_answer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/second_answer"
+        app:layout_constraintBottom_toTopOf="@+id/user_answer_two"
+        app:layout_constraintStart_toStartOf="@+id/user_answer_two"
+        app:layout_constraintTop_toBottomOf="@+id/user_answer_one" />
+
+    <Button
+        android:id="@+id/ready_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="68dp"
+        android:text="@string/ready"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

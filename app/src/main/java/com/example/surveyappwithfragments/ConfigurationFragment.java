@@ -21,10 +21,10 @@ import android.widget.EditText;
 public class ConfigurationFragment extends Fragment {
 
     interface MarkSurveyDoneListener {
-        void surveyDone(Survey survey);
+        void surveyDone(Survey survey); //interface method to respond to "Ready" click
     }
 
-    private MarkSurveyDoneListener mSurveyDoneListener;
+    private MarkSurveyDoneListener mSurveyDoneListener; //instantiation of listener
 
 
     private static final String TAG = "CONFIGURATION FRAGMENT";
@@ -39,7 +39,7 @@ public class ConfigurationFragment extends Fragment {
 
     public static ConfigurationFragment newInstance(Survey survey) {
         final Bundle args = new Bundle();
-        args.putParcelable(ARGS_CONFIGURATION, survey);
+        args.putParcelable(ARGS_CONFIGURATION, survey); //sends data from survey
         final ConfigurationFragment fragment = new ConfigurationFragment();
         fragment.setArguments(args);
         return fragment;
@@ -51,7 +51,7 @@ public class ConfigurationFragment extends Fragment {
 
         Log.d(TAG, "onAttach");
 
-        if (context instanceof MarkSurveyDoneListener) {
+        if (context instanceof MarkSurveyDoneListener) { //attaches listener
             mSurveyDoneListener = (MarkSurveyDoneListener) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement MarkSurveyDoneListener");
@@ -66,7 +66,7 @@ public class ConfigurationFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_configuration, container, false);
 
-        if(getArguments() != null && getArguments().getParcelable(ARGS_CONFIGURATION)!= null){
+        if(getArguments() != null && getArguments().getParcelable(ARGS_CONFIGURATION)!= null){ //as long as arguments/bundle have information...
 
             final Survey survey = getArguments().getParcelable(ARGS_CONFIGURATION);
 
@@ -75,7 +75,7 @@ public class ConfigurationFragment extends Fragment {
             mUserAnswerTwo = view.findViewById(R.id.user_answer_two);
             mReadyButton = view.findViewById(R.id.ready_button);
 
-            configureSurvey(survey);
+            configureSurvey(survey); //sends names to edit texts to make things clearer for user
 
         } else {
             Log.d(TAG, "Did not receive survey.");
@@ -96,12 +96,12 @@ public class ConfigurationFragment extends Fragment {
         mReadyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newSurvey.setSurveyQuestion(mUserQuestion.getText().toString());
+                newSurvey.setSurveyQuestion(mUserQuestion.getText().toString()); //after user says they're ready, takes info from edit texts, adds to Survey instance
                 newSurvey.setOptionOne(mUserAnswerOne.getText().toString());
                 newSurvey.setOptionTwo(mUserAnswerTwo.getText().toString());
-                newSurvey.setCountOne(0);
+                newSurvey.setCountOne(0); //clear counts for new survey
                 newSurvey.setCountTwo(0);
-                mSurveyDoneListener.surveyDone(newSurvey);
+                mSurveyDoneListener.surveyDone(newSurvey); //sends new survey to main activity
             }
         });
     }

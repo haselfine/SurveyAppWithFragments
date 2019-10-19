@@ -21,14 +21,14 @@ import android.widget.TextView;
 public class ResultsFragment extends Fragment implements View.OnClickListener{
 
 
-    public interface ResultButtonClickedListener{
+    public interface ResultButtonClickedListener{ //interface allows communication to main activity
         void resetClick();
     }
 
-    private ResultButtonClickedListener mResultButtonClickedListener;
+    private ResultButtonClickedListener mResultButtonClickedListener; //instantiation of interface
 
     private static final String TAG = "RESULTS FRAGMENT";
-    private static final String ARGS_RESULTS = "RESULT ARGUMENTS";
+    private static final String ARGS_RESULTS = "RESULT ARGUMENTS"; //tag for arguments in instantiation method
 
     TextView mOptionOne;
     TextView mOptionTwo;
@@ -41,7 +41,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
 
     public static ResultsFragment newInstance(Survey survey) {
         final Bundle args = new Bundle();
-        args.putParcelable(ARGS_RESULTS, survey);
+        args.putParcelable(ARGS_RESULTS, survey); //receives info from survey
         final ResultsFragment fragment = new ResultsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -53,7 +53,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
 
         super.onAttach(context);
 
-        if(context instanceof ResultsFragment.ResultButtonClickedListener){
+        if(context instanceof ResultsFragment.ResultButtonClickedListener){ //attaches listener
             mResultButtonClickedListener = (ResultsFragment.ResultButtonClickedListener) context;
             Log.d(TAG, "On attach configured listener " + mResultButtonClickedListener);
         } else {
@@ -67,7 +67,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
 
         Log.d(TAG, "onCreateView");
 
-        View view = inflater.inflate(R.layout.fragment_results, container, false);
+        View view = inflater.inflate(R.layout.fragment_results, container, false); //inflation
 
         mOptionOne = view.findViewById(R.id.optionOneLabel);
         mOptionTwo = view.findViewById(R.id.optionTwoLabel);
@@ -75,14 +75,14 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
         mCountTwo = view.findViewById(R.id.countTwoLabel);
 
         mResetButton = view.findViewById(R.id.reset_button);
-        mResetButton.setOnClickListener(this);
+        mResetButton.setOnClickListener(this); //onclick listener is in method after oncreate
 
         if(getArguments() != null){
-            mSurvey = getArguments().getParcelable(ARGS_RESULTS);
+            mSurvey = getArguments().getParcelable(ARGS_RESULTS); //assigns arguments to Survey instance
         }
 
         if(mSurvey != null){
-            setSurveyInfo(mSurvey);
+            setSurveyInfo(mSurvey); //takes info from survey, adds to textviews
         }
 
         return view;
@@ -99,7 +99,7 @@ public class ResultsFragment extends Fragment implements View.OnClickListener{
         mCountTwo.setText(Integer.toString(survey.getCountTwo()));
     }
 
-    public void notifyCountChange(Survey survey){
+    public void notifyCountChange(Survey survey){ //this is honestly redundant but I'm lazy and don't wanna fix it right now
         setSurveyInfo(survey);
     }
 }

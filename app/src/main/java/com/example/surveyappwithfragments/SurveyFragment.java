@@ -23,10 +23,10 @@ import android.widget.TextView;
 public class SurveyFragment extends Fragment implements View.OnClickListener{
 
     public interface ButtonClickedListener{
-        void buttonClicked(View button);
+        void buttonClicked(View button); //sends buttons to main activity
     }
 
-    private ButtonClickedListener mButtonClickedListener;
+    private ButtonClickedListener mButtonClickedListener; //instantiation of listener
 
     private static final String TAG = "SURVEY FRAGMENT";
     private static final String ARGS_SURVEY = "SURVEY ARGUMENTS";
@@ -42,7 +42,7 @@ public class SurveyFragment extends Fragment implements View.OnClickListener{
 
     public static SurveyFragment newInstance(Survey survey) {
         final Bundle args = new Bundle();
-        args.putParcelable(ARGS_SURVEY, survey);
+        args.putParcelable(ARGS_SURVEY, survey); //sends bundle
         final SurveyFragment fragment = new SurveyFragment();
         fragment.setArguments(args);
         return fragment;
@@ -54,7 +54,7 @@ public class SurveyFragment extends Fragment implements View.OnClickListener{
 
         super.onAttach(context);
 
-        if(context instanceof ButtonClickedListener){
+        if(context instanceof ButtonClickedListener){ //attach listener
             mButtonClickedListener = (ButtonClickedListener) context;
             Log.d(TAG, "On attach configured listener " + mButtonClickedListener);
         } else {
@@ -84,21 +84,21 @@ public class SurveyFragment extends Fragment implements View.OnClickListener{
         mSurvey = new Survey();
 
         if(getArguments() != null){
-            mSurvey = getArguments().getParcelable(ARGS_SURVEY);
+            mSurvey = getArguments().getParcelable(ARGS_SURVEY); //assign bundle info to survey instance
         }
 
-        if(mSurvey != null){
+        if(mSurvey != null){ //translate survey to objects
             setSurveyInfo(mSurvey);
         }
 
         return view;
     }
     @Override
-    public void onClick(View button){
+    public void onClick(View button){ //sends buttons to main activity
         mButtonClickedListener.buttonClicked(button);
     }
 
-    public void setSurveyInfo(Survey mSurvey){
+    public void setSurveyInfo(Survey mSurvey){ //update object text
         mQuestionTextView.setText(mSurvey.getSurveyQuestion());
         mYesButton.setText(mSurvey.getOptionOne());
         mNoButton.setText(mSurvey.getOptionTwo());

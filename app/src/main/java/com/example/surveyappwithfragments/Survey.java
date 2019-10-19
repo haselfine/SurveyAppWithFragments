@@ -3,13 +3,13 @@ package com.example.surveyappwithfragments;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Survey implements Parcelable {
+public class Survey implements Parcelable {//parcelable allows bundling
 
-    private String surveyQuestion;
-    private String optionOne;
-    private String optionTwo;
-    private int countOne;
-    private int countTwo;
+    private String surveyQuestion; //title
+    private String optionOne; //first answer
+    private String optionTwo; //second answer
+    private int countOne; //count of responses to first answer
+    private int countTwo; //count of responses to second answer
 
 
 
@@ -70,7 +70,7 @@ public class Survey implements Parcelable {
         return 0;
     }
 
-    protected Survey(Parcel in) {
+    protected Survey(Parcel in) { //translates to parcelable
         surveyQuestion = in.readString();
         optionOne = in.readString();
         optionTwo = in.readString();
@@ -91,7 +91,7 @@ public class Survey implements Parcelable {
     };
 
     @Override
-    public void writeToParcel(Parcel dest, int flags){
+    public void writeToParcel(Parcel dest, int flags){ //sends info to parcel for bundling
         dest.writeString(surveyQuestion);
         dest.writeString(optionOne);
         dest.writeString(optionTwo);
